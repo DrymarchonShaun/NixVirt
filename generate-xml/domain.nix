@@ -107,6 +107,7 @@ let
                 (subelem "tlbflush" [ (subattr "state" typeBoolOnOff) ] [ ])
                 (subelem "ipi" [ (subattr "state" typeBoolOnOff) ] [ ])
                 (subelem "evmcs" [ (subattr "state" typeBoolOnOff) ] [ ])
+                (subelem "avic" [ (subattr "state" typeBoolOnOff) ] [ ])
               ])
             (subelem "capabilities" [ (subattr "policy" typeString) ]
               [
@@ -152,6 +153,7 @@ let
                 (subelem "wake_alarm" [ (subattr "state" typeBoolOnOff) ] [ ])
               ])
             (subelem "vmport" [ (subattr "state" typeBoolOnOff) ] [ ])
+            (subelem "smm" [ (subattr "state" typeBoolOnOff) ] [ ])
             (subelem "kvm" [ ] [
               (subelem "hidden" [ (subattr "state" typeBoolOnOff) ] [ ])
               (subelem "hint-dedicated" [ (subattr "state" typeBoolOnOff) ] [ ])
@@ -198,6 +200,7 @@ let
         (subelem "clock"
           [
             (subattr "offset" typeString)
+            (subattr "timezone" typeString)
           ]
           [
             (subelem "timer"
@@ -305,6 +308,7 @@ let
                         (subattr "name" typeString)
                         (subattr "type" typeString)
                         (subattr "cache" typeString)
+                        (subattr "io" typeString)
                         (subattr "discard" typeString)
                       ] [ ]
                     )
@@ -314,6 +318,7 @@ let
                     targetelem
                     (subelem "readonly" [ ] [ ])
                     addresselem
+                    (subelem "serial" [ ] typeString)
                     (subelem "boot" [ (subattr "order" typeInt) ] [ ])
                   ]
                 )
@@ -422,8 +427,13 @@ let
                   (subelem "image" [ (subattr "compression" typeBoolOnOff) ] [ ])
                   (subelem "gl" [ (subattr "enable" typeBoolYesNo) ] [ ])
                 ])
-              (subelem "sound" [ (subattr "model" typeString) ] [ addresselem ])
-              (subelem "audio" [ (subattr "id" typeInt) (subattr "type" typeString) ] [ ])
+              (subelem "sound" [ (subattr "model" typeString) ] 
+              [
+                (subelem "codec" [(subattr "type" typeString)] [])
+                (subelem "audio" [(subattr "id" typeInt)] [])
+                addresselem
+                ])
+              (subelem "audio" [ (subattr "id" typeInt) (subattr "type" typeString) (subattr "serverName" typeString)] [ ])
               (subelem "video" [ ]
                 [
                   (subelem "model"
