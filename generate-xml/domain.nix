@@ -320,6 +320,7 @@ let
                     addresselem
                     (subelem "serial" [ ] typeString)
                     (subelem "boot" [ (subattr "order" typeInt) ] [ ])
+                    (subelem "alias" [ (subattr "name" typeString) ] [ ])
                   ]
                 )
               )
@@ -427,13 +428,13 @@ let
                   (subelem "image" [ (subattr "compression" typeBoolOnOff) ] [ ])
                   (subelem "gl" [ (subattr "enable" typeBoolYesNo) ] [ ])
                 ])
-              (subelem "sound" [ (subattr "model" typeString) ] 
-              [
-                (subelem "codec" [(subattr "type" typeString)] [])
-                (subelem "audio" [(subattr "id" typeInt)] [])
-                addresselem
+              (subelem "sound" [ (subattr "model" typeString) ]
+                [
+                  (subelem "codec" [ (subattr "type" typeString) ] [ ])
+                  (subelem "audio" [ (subattr "id" typeInt) ] [ ])
+                  addresselem
                 ])
-              (subelem "audio" [ (subattr "id" typeInt) (subattr "type" typeString) (subattr "serverName" typeString)] [ ])
+              (subelem "audio" [ (subattr "id" typeInt) (subattr "type" typeString) (subattr "serverName" typeString) ] [ ])
               (subelem "video" [ ]
                 [
                   (subelem "model"
